@@ -1,0 +1,31 @@
+// Copyright 2025 Leon Xia. MIT License.
+
+:host {
+  display: block;
+  min-height: 100vh;
+  position: relative;
+}
+
+.main-content {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  z-index: 10000;
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-accent);
+  color: var(--color-background);
+  font-weight: 600;
+  text-decoration: none;
+
+  &:focus {
+    top: 0;
+  }
+}
