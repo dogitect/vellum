@@ -1,0 +1,55 @@
+// Copyright 2025 Leon Xia. MIT License.
+
+.not-found {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xl) var(--space-md);
+  background-color: var(--color-background);
+
+  @media (max-width: 768px) {
+    padding: var(--space-lg) var(--space-sm);
+  }
+}
+
+.not-found__container {
+  max-width: 900px;
+  width: 100%;
+  text-align: center;
+}
+
+.not-found__code {
+  display: block;
+  font-size: var(--font-size-8xl);
+  font-weight: 700;
+  color: var(--color-on-surface-variant);
+  margin-bottom: var(--space-md);
+  letter-spacing: -0.04em;
+  opacity: 0.5;
+
+  @media (max-width: 1024px) {
+    font-size: var(--font-size-7xl);
+  }
+
+  @media (max-width: 640px) {
+    font-size: var(--font-size-6xl);
+  }
+}
+
+.not-found__heading {
+  font-size: var(--font-size-5xl);
+  font-weight: 700;
+  color: var(--color-on-surface-variant);
+  margin: 0;
+  letter-spacing: -0.02em;
+  opacity: 0.5;
+
+  @media (max-width: 1024px) {
+    font-size: var(--font-size-4xl);
+  }
+
+  @media (max-width: 640px) {
+    font-size: var(--font-size-3xl);
+  }
+}
