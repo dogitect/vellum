@@ -1,0 +1,24 @@
+{
+  "categories": [
+    {
+      "slug": "boardroom",
+      "projects": ["executive-quarterly", "strategy-review", "annual-report"]
+    },
+    {
+      "slug": "spotlight",
+      "projects": ["product-launch", "tech-conference", "brand-reveal"]
+    },
+    {
+      "slug": "pitch",
+      "projects": ["seed-round", "series-a", "venture-deck"]
+    },
+    {
+      "slug": "blueprint",
+      "projects": ["system-architecture", "api-documentation", "tech-overview"]
+    },
+    {
+      "slug": "portfolio",
+      "projects": ["designer-showcase", "developer-portfolio", "creative-works"]
+    }
+  ]
+}
