@@ -1,0 +1,55 @@
+{
+  "name": "Vellum by Dogitect — Crafting clarity on stage",
+  "short_name": "Vellum",
+  "description": "We craft keynote presentations that help professionals communicate with clarity, confidence, and authority.",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/",
+  "shortcuts": [
+    {
+      "name": "Works",
+      "short_name": "Works",
+      "description": "Browse presentation design portfolio",
+      "url": "/works"
+    },
+    {
+      "name": "Boardroom",
+      "short_name": "Boardroom",
+      "description": "Executive presentations for critical decisions",
+      "url": "/works/boardroom"
+    },
+    {
+      "name": "Spotlight",
+      "short_name": "Spotlight",
+      "description": "Keynotes and product launch presentations",
+      "url": "/works/spotlight"
+    },
+    {
+      "name": "Pitch",
+      "short_name": "Pitch",
+      "description": "Investor presentations and business plans",
+      "url": "/works/pitch"
+    },
+    {
+      "name": "Blueprint",
+      "short_name": "Blueprint",
+      "description": "Technical solutions and architecture docs",
+      "url": "/works/blueprint"
+    },
+    {
+      "name": "Portfolio",
+      "short_name": "Portfolio",
+      "description": "Professional portfolios with clarity",
+      "url": "/works/portfolio"
+    }
+  ]
+}
