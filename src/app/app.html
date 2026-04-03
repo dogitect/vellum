@@ -1,0 +1,17 @@
+<!-- Copyright 2025 Leon Xia. MIT License. -->
+
+<a class="skip-to-content" href="#main-content">Skip to content</a>
+
+@if (showHeroBackground()) {
+  <app-hero-background />
+}
+
+<app-navigation />
+
+<main class="main-content" role="main" id="main-content">
+  <router-outlet />
+</main>
+
+@if (showFooter()) {
+  <app-footer />
+}
