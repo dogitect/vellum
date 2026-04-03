@@ -10,6 +10,8 @@ import { createHash } from 'node:crypto';
 
 const CONFIG = {
   bucketName: 'assets',
+  r2KeyPrefix: 'projects/vellum',
+  r2BaseUrl: 'https://assets.dogitect.io',
   r2PublicUrl: 'https://assets.dogitect.io/projects/vellum',
   sourceDirs: ['public/images'],
   supportedExtensions: new Set([
@@ -73,6 +75,7 @@ function runCommand(
 async function validateAuth(): Promise<void> {
   const result = await runCommand('bunx', ['wrangler', 'whoami'], 10000);
   if (result.status === 0 && result.stdout.includes('logged in')) {
+    console.log('Authenticated via wrangler login.');
     return;
   }
 
@@ -81,9 +84,11 @@ async function validateAuth(): Promise<void> {
 
   if (missing.length > 0) {
     console.error('Not authenticated with Cloudflare.');
+    console.error(`Missing env vars: ${missing.join(', ')}`);
     console.error('Run `bunx wrangler login` or set environment variables.');
     process.exit(1);
   }
+  console.log('Authenticated via environment variables.');
 }
 
 async function calculateMD5(filePath: string): Promise<string> {
@@ -107,7 +112,7 @@ async function findLocalFiles(): Promise<LocalFile[]> {
         } else if (entry.isFile()) {
           const ext = extname(entry.name).toLowerCase();
           if (CONFIG.supportedExtensions.has(ext)) {
-            const r2Key = relative('public', fullPath);
+            const r2Key = `${CONFIG.r2KeyPrefix}/${relative('public', fullPath)}`;
 
             if (seenPaths.has(r2Key)) continue;
             seenPaths.add(r2Key);
@@ -135,7 +140,7 @@ async function getRemoteETag(
   r2Key: string
 ): Promise<{ exists: boolean; etag?: string }> {
   try {
-    const url = `${CONFIG.r2PublicUrl}/${r2Key}`;
+    const url = `${CONFIG.r2BaseUrl}/${r2Key}`;
     const response = await fetch(url, { method: 'HEAD' });
 
     if (!response.ok) {
@@ -150,7 +155,9 @@ async function getRemoteETag(
   }
 }
 
-async function uploadFile(file: LocalFile): Promise<boolean> {
+async function uploadFile(
+  file: LocalFile
+): Promise<{ ok: boolean; error?: string }> {
   const result = await runCommand(
     'bunx',
     [
@@ -168,7 +175,9 @@ async function uploadFile(file: LocalFile): Promise<boolean> {
     120000
   );
 
-  return result.status === 0;
+  if (result.status === 0) return { ok: true };
+  const error = (result.stderr || result.stdout || 'Unknown error').trim();
+  return { ok: false, error };
 }
 
 function formatSize(bytes: number): string {
@@ -243,13 +252,13 @@ async function syncFiles(localFiles: LocalFile[]): Promise<SyncResult> {
     }
 
     // Upload the file
-    const success = await uploadFile(file);
-    if (success) {
+    const upload = await uploadFile(file);
+    if (upload.ok) {
       console.log(`uploaded (${formatSize(file.size)})`);
       result.uploaded.push(file.r2Key);
     } else {
-      console.log('FAILED');
-      result.errors.push(file.r2Key);
+      console.log(`FAILED: ${upload.error}`);
+      result.errors.push(`${file.r2Key} — ${upload.error}`);
     }
   }
 
