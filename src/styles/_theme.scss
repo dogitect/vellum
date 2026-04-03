@@ -1,0 +1,56 @@
+// Copyright 2025 Leon Xia. MIT License.
+
+:root {
+  --color-background: #000000;
+  --color-surface: #1c1c1e;
+
+  --color-on-background: #f5f5f7;
+  --color-on-surface: #e5e5e7;
+  --color-on-surface-variant: #98989d;
+
+  --color-primary: #f5f5f7;
+  --color-primary-variant: #e5e5e7;
+  --color-accent: #8ab4f8;
+  --color-accent-variant: #aecbfa;
+
+  --color-divider: rgba(84, 84, 88, 0.65);
+  --color-error: #ff453a;
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 80px;
+
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+  --font-size-6xl: 4rem;
+  --font-size-7xl: 5rem;
+  --font-size-8xl: 6rem;
+
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  --icon-xs: 14px;
+  --icon-sm: 18px;
+  --icon-md: 24px;
+  --icon-lg: 32px;
+  --icon-xl: 48px;
+  --icon-2xl: 64px;
+}
