@@ -1,0 +1,39 @@
+{
+  "sections": [
+    {
+      "id": 1,
+      "slug": "manifesto",
+      "title": "Manifesto",
+      "statement": "Presentation is persuasion\nNot decoration\nNot slides\nClarity builds trust\nStory creates conviction\nI help you own the room",
+      "imagePath": "images/about/about-01.png"
+    },
+    {
+      "id": 2,
+      "slug": "philosophy",
+      "title": "Philosophy",
+      "statement": "Behind every great presentation\nis a great presenter\nStrategy first\nStory second\nSlides serve the speaker\nNot the other way around",
+      "imagePath": "images/about/about-02.png"
+    },
+    {
+      "id": 3,
+      "slug": "approach",
+      "title": "Approach",
+      "statement": "I work with you\nNot for you\nShape the narrative together\nPrepare for the hard questions\nUntil confidence becomes natural",
+      "imagePath": "images/about/about-03.png"
+    },
+    {
+      "id": 4,
+      "slug": "credibility",
+      "title": "Credibility",
+      "statement": "I speak the language of boardrooms\nand investor meetings\nBusiness strategy meets visual clarity\nTrusted with high-stakes moments\nBuilt for the conversations that matter",
+      "imagePath": "images/about/about-04.png"
+    },
+    {
+      "id": 5,
+      "slug": "principles",
+      "title": "Principles",
+      "statement": "Your voice, amplified\nYour story, clarified\nYour confidence, earned\nI stay behind the curtain\nYou take the spotlight",
+      "imagePath": "images/about/about-05.png"
+    }
+  ]
+}
