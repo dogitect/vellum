@@ -19,7 +19,8 @@ export interface ImageTransformOptions {
 
 const RESPONSIVE_WIDTHS = [640, 1280, 1920] as const;
 
-const CDN_BASE = environment.cloudflareCdnUrl;
+const CDN_ORIGIN = environment.cloudflareCdnOrigin;
+const R2_PREFIX = 'projects/vellum/';
 
 const DEFAULT_OPTIONS: ImageTransformOptions = {
   format: 'auto',
@@ -44,7 +45,8 @@ export class CloudflareImageService {
     if (opts.dpr) params.push(`dpr=${opts.dpr}`);
 
     const transformPath = params.join(',');
-    return `${CDN_BASE}/cdn-cgi/image/${transformPath}/${imagePath}`;
+    const r2Path = this.toR2Path(imagePath);
+    return `${CDN_ORIGIN}/cdn-cgi/image/${transformPath}/${r2Path}`;
   }
 
   /** Generates srcset string for responsive images. */
@@ -70,8 +72,11 @@ export class CloudflareImageService {
     });
   }
 
-  /** Converts a local image path to R2 path by stripping the leading slash. */
+  /** Converts a local image path to R2 key (idempotent). */
   toR2Path(localPath: string): string {
-    return localPath.replace(/^\//, '');
+    const stripped = localPath.replace(/^\//, '');
+    return stripped.startsWith(R2_PREFIX)
+      ? stripped
+      : `${R2_PREFIX}${stripped}`;
   }
 }

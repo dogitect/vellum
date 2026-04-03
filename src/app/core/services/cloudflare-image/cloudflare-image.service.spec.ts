@@ -7,7 +7,7 @@ import { CloudflareImageService } from './cloudflare-image.service';
 describe('CloudflareImageService', () => {
   let service: CloudflareImageService;
 
-  const CDN_BASE = 'https://assets.dogitect.io/projects/vellum';
+  const CDN_ORIGIN = 'https://assets.dogitect.io';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -24,7 +24,7 @@ describe('CloudflareImageService', () => {
     it('should generate URL with default options', () => {
       const url = service.getUrl('images/test.jpg');
       expect(url).toBe(
-        `${CDN_BASE}/cdn-cgi/image/format=auto,quality=85,fit=scale-down/images/test.jpg`
+        `${CDN_ORIGIN}/cdn-cgi/image/format=auto,quality=85,fit=scale-down/projects/vellum/images/test.jpg`
       );
     });
 
@@ -105,12 +105,22 @@ describe('CloudflareImageService', () => {
   });
 
   describe('toR2Path', () => {
-    it('should remove leading slash', () => {
-      expect(service.toR2Path('/images/test.jpg')).toBe('images/test.jpg');
+    it('should remove leading slash and add prefix', () => {
+      expect(service.toR2Path('/images/test.jpg')).toBe(
+        'projects/vellum/images/test.jpg'
+      );
     });
 
-    it('should preserve path without leading slash', () => {
-      expect(service.toR2Path('images/test.jpg')).toBe('images/test.jpg');
+    it('should add prefix to path without leading slash', () => {
+      expect(service.toR2Path('images/test.jpg')).toBe(
+        'projects/vellum/images/test.jpg'
+      );
+    });
+
+    it('should be idempotent', () => {
+      expect(service.toR2Path('projects/vellum/images/test.jpg')).toBe(
+        'projects/vellum/images/test.jpg'
+      );
     });
   });
 });

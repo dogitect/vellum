@@ -5,5 +5,6 @@ export const environment = {
   useCloudflareImages: true,
   siteUrl: 'https://vellum.dogitect.io',
   cloudflareCdnUrl: 'https://assets.dogitect.io/projects/vellum',
+  cloudflareCdnOrigin: 'https://assets.dogitect.io',
   analyticsId: 'G-BHNE8HRTZF',
 };

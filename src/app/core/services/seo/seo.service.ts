@@ -37,9 +37,7 @@ export interface WorkCategorySeo {
 
 const BASE_URL = environment.siteUrl;
 
-const ASSETS_URL = environment.cloudflareCdnUrl;
-
-const DEFAULT_OG_IMAGE = `${ASSETS_URL}/cdn-cgi/image/width=1280,format=png,quality=100/images/social-preview.png`;
+const DEFAULT_OG_IMAGE = `${environment.cloudflareCdnOrigin}/cdn-cgi/image/width=1280,format=png,quality=100/projects/vellum/images/social-preview.png`;
 
 const WORK_CATEGORIES: WorkCategorySeo[] = [
   {
@@ -210,7 +208,10 @@ export class SeoService {
 
   /** Generates full OG image URL for a work category. */
   getWorkOgImage(coverImage: string): string {
-    return `${ASSETS_URL}/cdn-cgi/image/width=1200,format=jpg,quality=90/${coverImage}`;
+    const r2Path = coverImage.startsWith('projects/')
+      ? coverImage
+      : `projects/vellum/${coverImage}`;
+    return `${environment.cloudflareCdnOrigin}/cdn-cgi/image/width=1200,format=jpg,quality=90/${r2Path}`;
   }
 
   /** Sets SEO for the Works listing page. */
