@@ -1,0 +1,139 @@
+<div #slideContainer class="slide-viewer" [class.fullscreen]="isFullscreen()">
+  @if (currentSlide(); as slide) {
+    @if (useCloudflare) {
+      <div
+        class="slide-viewer__background"
+        [class.high-res-loaded]="highResLoaded()"
+      >
+        <img
+          #lowResImg
+          class="slide-viewer__image slide-viewer__image--low"
+          [src]="lowResUrl()"
+          [alt]="'Slide ' + (currentIndex() + 1)"
+          loading="eager"
+          decoding="async"
+          draggable="false"
+          (load)="onLowResLoad(lowResImg)"
+        />
+        <img
+          #highResImg
+          class="slide-viewer__image slide-viewer__image--high"
+          [src]="highResUrl()"
+          [alt]="'Slide ' + (currentIndex() + 1)"
+          loading="eager"
+          decoding="async"
+          draggable="false"
+          (load)="onHighResLoad(highResImg)"
+        />
+      </div>
+    } @else {
+      <div class="slide-viewer__background slide-viewer__background--local">
+        <img
+          class="slide-viewer__image"
+          [src]="slide.path"
+          [alt]="'Slide ' + (currentIndex() + 1)"
+          loading="eager"
+          decoding="async"
+          draggable="false"
+        />
+      </div>
+    }
+  }
+
+  <header class="slide-viewer__header">
+    <div class="slide-viewer__info">
+      <span class="slide-viewer__title">{{ title() }}</span>
+      <span class="slide-viewer__counter">
+        {{ currentIndex() + 1 }} / {{ totalSlides() }}
+      </span>
+    </div>
+    <div class="slide-viewer__controls">
+      <button
+        type="button"
+        class="slide-viewer__btn"
+        (click)="toggleFullscreen()"
+        [attr.aria-label]="
+          isFullscreen() ? 'Exit fullscreen' : 'Enter fullscreen'
+        "
+      >
+        @if (isFullscreen()) {
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"
+            />
+          </svg>
+        } @else {
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"
+            />
+          </svg>
+        }
+      </button>
+      <button
+        type="button"
+        class="slide-viewer__btn slide-viewer__btn--close"
+        (click)="close()"
+        aria-label="Close viewer"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M18 6L6 18M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main
+    #slideStage
+    class="slide-viewer__main"
+    (click)="onSlideClick($event)"
+    (keydown)="onStageKeydown($event)"
+    tabindex="0"
+    role="button"
+    aria-label="Slide navigation"
+  >
+    <div
+      class="slide-viewer__nav-hint slide-viewer__nav-hint--prev"
+      [class.disabled]="!canGoPrev()"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path d="M15 18l-6-6 6-6" />
+      </svg>
+    </div>
+    <div
+      class="slide-viewer__nav-hint slide-viewer__nav-hint--next"
+      [class.disabled]="!canGoNext()"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path d="M9 18l6-6-6-6" />
+      </svg>
+    </div>
+  </main>
+
+  <app-rotate-device-hint />
+</div>

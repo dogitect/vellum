@@ -1,0 +1,17 @@
+@if (shouldShow()) {
+  <div
+    class="rotate-hint"
+    (click)="dismiss()"
+    (keydown)="onDismissKeydown($event)"
+    tabindex="0"
+    role="button"
+    aria-label="Dismiss rotate hint"
+  >
+    <div class="rotate-hint__content">
+      <span class="material-symbols-outlined rotate-hint__icon">
+        screen_rotation_alt
+      </span>
+      <p class="rotate-hint__text">Rotate for best viewing</p>
+    </div>
+  </div>
+}

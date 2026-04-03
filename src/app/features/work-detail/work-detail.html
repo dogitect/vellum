@@ -1,0 +1,67 @@
+@if (category(); as cat) {
+  <div class="work-detail-container">
+    <h1 class="visually-hidden">{{ cat.title }} — Presentation Design</h1>
+    <div class="scroll-spacer" [style.height.vh]="totalProjects() * 100"></div>
+
+    <div class="cards-viewport">
+      @for (project of projects(); track project.slug; let i = $index) {
+        @let style = cardStyles()[i];
+        <article
+          class="project-card"
+          [style.transform]="style['transform']"
+          [style.opacity]="style['opacity']"
+          [style.z-index]="style['zIndex']"
+          [style.pointer-events]="style['pointerEvents']"
+          [style.box-shadow]="style['boxShadow']"
+        >
+          <div class="project-card__background">
+            @if (isCardVisible(i)) {
+              <app-optimized-image
+                [src]="getProjectCover(project)"
+                [alt]="project.title"
+                [loading]="i === 0 ? 'eager' : 'lazy'"
+                [fetchpriority]="i === 0 ? 'high' : 'auto'"
+                sizes="100vw"
+              />
+            }
+            <div class="project-card__overlay"></div>
+          </div>
+
+          <div class="project-card__content">
+            <span class="project-card__date">{{
+              formatDate(project.date)
+            }}</span>
+            <button
+              type="button"
+              class="project-card__title"
+              (click)="openSlideViewer(project)"
+            >
+              {{ project.title }}
+            </button>
+            <p class="project-card__subtitle">{{ project.subtitle }}</p>
+            <p class="project-card__description">{{ project.description }}</p>
+          </div>
+        </article>
+      }
+    </div>
+
+    <div
+      class="nav-indicator"
+      [class.nav-indicator--horizontal]="totalProjects() >= 10"
+      role="status"
+      aria-live="polite"
+    >
+      <span class="nav-indicator__current">{{ activeIndex() + 1 }}</span>
+      <span class="nav-indicator__separator">/</span>
+      <span class="nav-indicator__total">{{ totalProjects() }}</span>
+    </div>
+  </div>
+
+  @if (slideViewerOpen()) {
+    <app-slide-viewer
+      [slides]="currentSlides()"
+      [title]="currentProjectTitle()"
+      (closed)="closeSlideViewer()"
+    />
+  }
+}

@@ -1,0 +1,230 @@
+// Copyright 2025 Leon Xia. MIT License.
+
+.slide-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  background: #000;
+  color: var(--color-on-background);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica,
+    Arial, sans-serif;
+
+  &.fullscreen {
+    .slide-viewer__header {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    &:hover {
+      .slide-viewer__header {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+  }
+}
+
+.slide-viewer__background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.slide-viewer__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  transition:
+    opacity 0.35s ease,
+    filter 0.35s ease,
+    transform 0.35s ease;
+}
+
+.slide-viewer__image--low {
+  opacity: 1;
+  filter: blur(18px) saturate(1.05);
+  transform: scale(1.04);
+}
+
+.slide-viewer__image--high {
+  opacity: 0;
+}
+
+.slide-viewer__background.high-res-loaded {
+  .slide-viewer__image--low {
+    opacity: 0;
+    filter: blur(0);
+    transform: scale(1);
+  }
+
+  .slide-viewer__image--high {
+    opacity: 1;
+  }
+}
+
+.slide-viewer__background--local {
+  .slide-viewer__image {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+}
+
+.slide-viewer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  transition: opacity 0.3s ease;
+}
+
+.slide-viewer__info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  user-select: none;
+}
+
+.slide-viewer__title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-on-background);
+}
+
+.slide-viewer__counter {
+  font-size: 0.875rem;
+  color: var(--color-on-surface-variant);
+  font-variant-numeric: tabular-nums;
+}
+
+.slide-viewer__title,
+.slide-viewer__counter {
+  user-select: none;
+}
+
+.slide-viewer__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.slide-viewer__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  border-radius: 6px;
+  color: var(--color-on-background);
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+
+  svg {
+    width: var(--icon-sm);
+    height: var(--icon-sm);
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+  }
+}
+
+.slide-viewer__main {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.slide-viewer__nav-hint {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 15;
+
+  svg {
+    width: var(--icon-lg);
+    height: var(--icon-lg);
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  &--prev {
+    left: 1rem;
+  }
+
+  &--next {
+    right: 1rem;
+  }
+
+  &.disabled svg {
+    color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.slide-viewer__main:hover .slide-viewer__nav-hint {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .slide-viewer__header {
+    padding: 0.75rem 1rem;
+  }
+
+  .slide-viewer__info {
+    gap: 1rem;
+  }
+
+  .slide-viewer__title {
+    font-size: 0.875rem;
+  }
+
+  .slide-viewer__btn {
+    width: 28px;
+    height: 28px;
+
+    svg {
+      width: var(--icon-xs);
+      height: var(--icon-xs);
+    }
+  }
+
+  .slide-viewer__nav-hint {
+    width: 40px;
+
+    svg {
+      width: var(--icon-md);
+      height: var(--icon-md);
+    }
+  }
+}
