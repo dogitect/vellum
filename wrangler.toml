@@ -1,0 +1,43 @@
+#:schema node_modules/wrangler/config-schema.json
+
+# Vellum by Dogitect — Cloudflare Worker Configuration
+# User worker serves Angular SPA via Workers Static Assets,
+# handling security headers, redirects, and caching.
+
+# ── Worker entry ─────────────────────────────────────────────
+name = "project-vellum"
+main = "worker/index.ts"
+compatibility_date = "2026-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# ── Static Assets ────────────────────────────────────────────
+# Requests go through the user worker, which calls
+# env.ASSETS.fetch() to serve files from the Angular build.
+[assets]
+directory = "dist/project-vellum/browser"
+binding = "ASSETS"
+html_handling = "drop-trailing-slash"
+not_found_handling = "single-page-application"
+
+# ── Routing ──────────────────────────────────────────────────
+routes = [
+  { pattern = "vellum.dogitect.io", custom_domain = true },
+]
+
+# ── Observability ────────────────────────────────────────────
+[observability]
+enabled = true
+
+[observability.logs]
+enabled = true
+persist = true
+invocation_logs = true
+
+[observability.traces]
+enabled = true
+persist = true
+
+# ── Environment: Staging ─────────────────────────────────────
+# No custom domain; deployed to *.workers.dev by default.
+[env.staging]
+name = "project-vellum-staging"
