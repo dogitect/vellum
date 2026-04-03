@@ -1,0 +1,154 @@
+// Copyright 2025 Leon Xia. MIT License.
+
+/**
+ * Breakpoint values matching Angular CDK BreakpointObserver.
+ * - Phone: < 768px
+ * - Tablet: 768px - 1024px
+ * - Desktop: > 1024px
+ */
+$breakpoint-phone: 768px;
+$breakpoint-tablet: 1024px;
+
+/**
+ * Apply styles only on phone devices (width < 768px).
+ * @content Styles to apply on phone
+ */
+@mixin phone-only {
+  @media (max-width: #{$breakpoint-phone - 1px}) {
+    @content;
+  }
+}
+
+/**
+ * Apply styles only on tablet devices (768px <= width <= 1024px).
+ * @content Styles to apply on tablet
+ */
+@mixin tablet-only {
+  @media (min-width: #{$breakpoint-phone}) and (max-width: #{$breakpoint-tablet}) {
+    @content;
+  }
+}
+
+/**
+ * Apply styles only on desktop devices (width > 1024px).
+ * @content Styles to apply on desktop
+ */
+@mixin desktop-only {
+  @media (min-width: #{$breakpoint-tablet + 1px}) {
+    @content;
+  }
+}
+
+/**
+ * Apply styles on tablet and above (width >= 768px).
+ * @content Styles to apply on tablet and larger
+ */
+@mixin tablet-up {
+  @media (min-width: #{$breakpoint-phone}) {
+    @content;
+  }
+}
+
+/**
+ * Apply styles on desktop and above (width > 1024px).
+ * @content Styles to apply on desktop
+ */
+@mixin desktop-up {
+  @media (min-width: #{$breakpoint-tablet + 1px}) {
+    @content;
+  }
+}
+
+/**
+ * Apply styles on tablet and below (width <= 1024px).
+ * @content Styles to apply on tablet and smaller
+ */
+@mixin tablet-down {
+  @media (max-width: #{$breakpoint-tablet}) {
+    @content;
+  }
+}
+
+/**
+ * Apply styles on phone and below (width < 768px).
+ * @content Styles to apply on phone
+ */
+@mixin phone-down {
+  @media (max-width: #{$breakpoint-phone - 1px}) {
+    @content;
+  }
+}
+
+/**
+ * Responsive grid with automatic column adjustment.
+ * @param {number} $min-column-width - Minimum width for each column
+ * @param {number} $gap - Gap between grid items
+ */
+@mixin responsive-grid($min-column-width: 300px, $gap: var(--space-lg)) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min-column-width, 1fr));
+  gap: $gap;
+}
+
+/**
+ * Container with responsive padding.
+ */
+@mixin responsive-container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
+
+  @include tablet-up {
+    padding-left: var(--space-xl);
+    padding-right: var(--space-xl);
+  }
+
+  @include desktop-up {
+    padding-left: var(--space-3xl);
+    padding-right: var(--space-3xl);
+  }
+}
+
+.hide-on-phone {
+  @include phone-only {
+    display: none !important;
+  }
+}
+
+.hide-on-tablet {
+  @include tablet-only {
+    display: none !important;
+  }
+}
+
+.hide-on-desktop {
+  @include desktop-only {
+    display: none !important;
+  }
+}
+
+.show-on-phone-only {
+  display: none !important;
+
+  @include phone-only {
+    display: block !important;
+  }
+}
+
+.show-on-tablet-only {
+  display: none !important;
+
+  @include tablet-only {
+    display: block !important;
+  }
+}
+
+.show-on-desktop-only {
+  display: none !important;
+
+  @include desktop-only {
+    display: block !important;
+  }
+}
