@@ -1,0 +1,188 @@
+@use "../../../styles/animations" as animations;
+@use "../../../styles/responsive" as responsive;
+
+// Copyright 2025 Leon Xia. MIT License.
+
+.navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: var(--space-md) var(--space-xl);
+  pointer-events: none;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+
+  &--hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  @include responsive.phone-only {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  &__backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    pointer-events: auto;
+    cursor: default;
+  }
+
+  &__toggle {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 12px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+    pointer-events: auto;
+    -webkit-tap-highlight-color: transparent;
+
+    &-line {
+      display: block;
+      width: 20px;
+      height: 1.5px;
+      background-color: var(--color-on-background);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-origin: center;
+    }
+
+    &--open &-line {
+      &:nth-child(1) {
+        transform: translateY(6.5px) rotate(45deg);
+      }
+
+      &:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+
+      &:nth-child(3) {
+        transform: translateY(-6.5px) rotate(-45deg);
+      }
+    }
+
+    &:hover &-line {
+      background-color: var(--color-on-background);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+      border-radius: 0;
+    }
+  }
+
+  &__menu {
+    position: absolute;
+    top: calc(var(--space-md) + 44px + var(--space-sm));
+    right: var(--space-xl);
+    z-index: 1001;
+
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    pointer-events: none;
+
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    @include responsive.phone-only {
+      right: var(--space-md);
+      top: calc(var(--space-sm) + 44px + var(--space-sm));
+    }
+
+    &--open {
+      width: auto;
+      height: auto;
+      padding: var(--space-sm) 0;
+      pointer-events: auto;
+
+      .navigation__list {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+  }
+
+  &__item {
+    position: relative;
+  }
+
+  &__link {
+    display: block;
+    padding: var(--space-sm) var(--space-md);
+    color: var(--color-on-surface-variant);
+    font-size: var(--font-size-sm);
+    font-weight: 400;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    border-radius: 0;
+    white-space: nowrap;
+    background-color: rgba(0, 0, 0, 0.85);
+    @include animations.hover-transition(color, background-color);
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-on-background);
+      background-color: rgba(0, 0, 0, 0.95);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+
+    &--accent {
+      color: #4285f4;
+      font-weight: 500;
+
+      &:hover,
+      &:focus-visible {
+        color: #5a9cff;
+        background-color: rgba(0, 0, 0, 0.95);
+      }
+    }
+  }
+}

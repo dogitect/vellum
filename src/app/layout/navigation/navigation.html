@@ -1,0 +1,49 @@
+<header
+  class="navigation"
+  role="banner"
+  [class.navigation--hidden]="isHidden()"
+>
+  @if (isMenuOpen()) {
+    <div
+      class="navigation__backdrop"
+      (click)="closeMenu()"
+      aria-hidden="true"
+    ></div>
+  }
+
+  <button
+    type="button"
+    class="navigation__toggle"
+    [class.navigation__toggle--open]="isMenuOpen()"
+    [attr.aria-expanded]="isMenuOpen()"
+    aria-label="Toggle navigation menu"
+    (click)="toggleMenu()"
+  >
+    <span class="navigation__toggle-line"></span>
+    <span class="navigation__toggle-line"></span>
+    <span class="navigation__toggle-line"></span>
+  </button>
+
+  <nav
+    class="navigation__menu"
+    [class.navigation__menu--open]="isMenuOpen()"
+    aria-label="Main navigation"
+  >
+    <ul class="navigation__list" role="menubar">
+      @for (item of navItems; track item.label) {
+        <li class="navigation__item" role="none">
+          <a
+            class="navigation__link"
+            [href]="item.href"
+            role="menuitem"
+            tabindex="0"
+            (click)="onNavItemClick()"
+            (keydown)="onKeyDown($event)"
+          >
+            {{ item.label }}
+          </a>
+        </li>
+      }
+    </ul>
+  </nav>
+</header>
