@@ -1,0 +1,75 @@
+@use "../../../styles/animations" as animations;
+@use "../../../styles/responsive" as responsive;
+
+// Copyright 2025 Leon Xia. MIT License.
+
+.hero-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  background-color: var(--color-background);
+
+  &__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
+  &__slogan {
+    position: absolute;
+    bottom: var(--space-xl);
+    left: var(--space-2xl);
+    z-index: 10;
+    @include animations.animate-fade-in-up(0.3s, 0.8s);
+
+    @include responsive.tablet-only {
+      top: 50%;
+      bottom: auto;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      padding: 0 var(--space-lg);
+    }
+
+    @include responsive.phone-only {
+      top: 50%;
+      bottom: auto;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      padding: 0 var(--space-md);
+    }
+  }
+
+  &__slogan-text {
+    font-size: var(--font-size-6xl);
+    font-weight: 500;
+    color: var(--color-on-background);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    text-transform: uppercase;
+    text-align: center;
+
+    @include responsive.tablet-only {
+      font-size: var(--font-size-6xl);
+    }
+
+    @include responsive.phone-only {
+      font-size: var(--font-size-5xl);
+    }
+  }
+}
