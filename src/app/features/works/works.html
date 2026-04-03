@@ -1,0 +1,66 @@
+<div class="works-scroll-container">
+  <h1 class="visually-hidden">Our Services</h1>
+  <div class="scroll-spacer" [style.height.vh]="totalWorks() * 100"></div>
+
+  <div class="cards-viewport">
+    @for (work of workItems(); track work.slug; let i = $index) {
+      @let style = cardStyles()[i];
+      <article
+        class="work-card"
+        [style.transform]="style['transform']"
+        [style.opacity]="style['opacity']"
+        [style.visibility]="style['visibility']"
+        [style.z-index]="style['zIndex']"
+        [style.pointer-events]="style['pointerEvents']"
+        [style.box-shadow]="style['boxShadow']"
+      >
+        <div class="card-content">
+          <div class="content-inner">
+            <h2 class="work-title">{{ work.title }}</h2>
+            <h2 class="work-subtitle">{{ work.subtitle }}</h2>
+            <p class="work-description">{{ work.description }}</p>
+            <a [routerLink]="['/works', work.slug]" class="view-link">
+              <span>Explore {{ work.title }}</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="card-image">
+          @if (isCardVisible(i)) {
+            <app-optimized-image
+              [src]="work.image"
+              [alt]="work.title"
+              [loading]="i === 0 ? 'eager' : 'lazy'"
+              [fetchpriority]="i === 0 ? 'high' : 'auto'"
+              sizes="50vw"
+            />
+          }
+        </div>
+      </article>
+    }
+  </div>
+
+  <div class="scroll-indicator" role="status" aria-live="polite">
+    @for (work of workItems(); track work.slug; let i = $index) {
+      <div
+        class="indicator-dot"
+        [class.active]="i === activeIndex()"
+        [class.past]="i < activeIndex()"
+      ></div>
+    }
+  </div>
+</div>

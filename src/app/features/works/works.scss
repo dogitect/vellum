@@ -1,0 +1,253 @@
+// Copyright 2025 Leon Xia. MIT License.
+
+.works-scroll-container {
+  position: relative;
+  width: 100%;
+  background: var(--color-background);
+}
+
+.scroll-spacer {
+  position: relative;
+  width: 100%;
+  pointer-events: none;
+}
+
+.cards-viewport {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+
+  > * {
+    pointer-events: auto;
+  }
+}
+
+.work-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--color-background);
+  will-change: transform, opacity;
+  transform-origin: center top;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 45% 55%;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-rows: 40% 60%;
+  }
+}
+
+.card-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  background: var(--color-background);
+  position: relative;
+  z-index: 2;
+
+  @media (max-width: 1024px) {
+    order: 2;
+    padding: 2rem;
+    align-items: flex-start;
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+  }
+}
+
+.content-inner {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  max-width: 540px;
+  height: 420px;
+  user-select: none;
+
+  @media (max-width: 1024px) {
+    max-width: 100%;
+    height: 360px;
+  }
+
+  @media (max-width: 768px) {
+    height: 320px;
+  }
+}
+
+.work-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 300;
+  color: var(--color-on-background);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: clamp(2rem, 8vw, 2.5rem);
+    margin-bottom: 0.75rem;
+  }
+}
+
+.work-subtitle {
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  font-weight: 400;
+  color: var(--color-on-surface);
+  line-height: 1.4;
+  margin-bottom: 1.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.work-description {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-on-surface-variant);
+  line-height: 1.7;
+  align-self: start;
+
+  @media (max-width: 768px) {
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+}
+
+.view-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 220px;
+  height: 52px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-on-background);
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  align-self: start;
+
+  svg {
+    width: var(--icon-sm);
+    height: var(--icon-sm);
+    transition: transform 0.2s ease;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.3);
+
+    svg {
+      transform: translateX(4px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 200px;
+    height: 48px;
+    font-size: 0.875rem;
+  }
+}
+
+.card-image {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-surface);
+
+  @media (max-width: 1024px) {
+    order: 1;
+  }
+
+  app-optimized-image,
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  ::ng-deep .optimized-image {
+    height: 100%;
+
+    img {
+      object-position: center;
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.15) 0%,
+      transparent 30%
+    );
+    pointer-events: none;
+    z-index: 1;
+
+    @media (max-width: 1024px) {
+      background: linear-gradient(
+        to bottom,
+        transparent 70%,
+        rgba(0, 0, 0, 0.3) 100%
+      );
+    }
+  }
+}
+
+.scroll-indicator {
+  position: fixed;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  z-index: 50;
+
+  @media (max-width: 768px) {
+    right: 1rem;
+    gap: 0.5rem;
+  }
+}
+
+.indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &.active {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: scale(1.25);
+  }
+
+  &.past {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+
+  @media (max-width: 768px) {
+    width: 6px;
+    height: 6px;
+  }
+}
