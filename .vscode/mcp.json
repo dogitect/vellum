@@ -1,0 +1,29 @@
+{
+	"servers": {
+		"angular-mcp": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"@angular/cli",
+				"mcp"
+			],
+			"type": "stdio"
+		},
+    "playwright-mcp": {
+			"command": "npx",
+			"args": [
+				"@playwright/mcp@latest"
+			],
+			"type": "stdio"
+		},
+		"chrome-devtools-mcp": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"chrome-devtools-mcp"
+			],
+			"env": {},
+			"type": "stdio"
+		}
+	}
+}
