@@ -1,0 +1,175 @@
+@use "styles/theme";
+@use "styles/animations";
+@use "styles/responsive";
+
+// Copyright 2025 Leon Xia. MIT License.
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family:
+    "Roboto",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Helvetica,
+    Arial,
+    sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-on-background);
+  background-color: var(--color-background);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--color-on-background);
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: var(--font-size-6xl);
+  font-weight: 300;
+
+  @include responsive.phone-only {
+    font-size: var(--font-size-4xl);
+  }
+
+  @include responsive.tablet-only {
+    font-size: var(--font-size-5xl);
+  }
+}
+
+h2 {
+  font-size: var(--font-size-4xl);
+
+  @include responsive.phone-only {
+    font-size: var(--font-size-2xl);
+  }
+}
+
+h3 {
+  font-size: var(--font-size-2xl);
+
+  @include responsive.phone-only {
+    font-size: var(--font-size-xl);
+  }
+}
+
+p {
+  font-family: "Roboto", sans-serif;
+  font-size: var(--font-size-base);
+  color: var(--color-on-surface);
+  margin-bottom: var(--space-md);
+}
+
+a {
+  font-family: "Roboto", sans-serif;
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--duration-fast) ease;
+
+  &:hover {
+    color: var(--color-accent-variant);
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 300,
+    "GRAD" 0,
+    "opsz" 24;
+  vertical-align: middle;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.container {
+  @include responsive.responsive-container;
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-background);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-on-surface-variant);
+  border-radius: var(--radius-full);
+
+  &:hover {
+    background: var(--color-on-surface);
+  }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-on-surface-variant) var(--color-surface);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
