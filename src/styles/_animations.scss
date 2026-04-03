@@ -1,0 +1,224 @@
+// Copyright 2025 Leon Xia. MIT License.
+
+/**
+ * Fade in animation with upward movement.
+ * Creates an elegant entrance effect.
+ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/**
+ * Fade in animation with scale effect.
+ * Provides a subtle zoom entrance.
+ */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/**
+ * Subtle floating animation.
+ * Creates a gentle hovering effect for elements.
+ */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/**
+ * Pulse animation for attention-grabbing elements.
+ */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/**
+ * Shimmer effect for loading states.
+ */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/**
+ * Gradient flow animation for backgrounds.
+ */
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/**
+ * Glow pulse animation for accent elements.
+ */
+@keyframes glowPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 5px rgba(66, 133, 244, 0.5),
+      0 0 10px rgba(66, 133, 244, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 0 20px rgba(66, 133, 244, 0.8),
+      0 0 30px rgba(66, 133, 244, 0.5);
+  }
+}
+
+/**
+ * Text reveal animation.
+ */
+@keyframes textReveal {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/**
+ * Line draw animation for decorative elements.
+ */
+@keyframes drawLine {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/**
+ * Apply fade-in-up animation to an element.
+ * @param {number} $delay - Animation delay in seconds
+ * @param {number} $duration - Animation duration in seconds
+ */
+@mixin animate-fade-in-up($delay: 0s, $duration: 0.6s) {
+  animation: fadeInUp $duration cubic-bezier(0.16, 1, 0.3, 1) $delay forwards;
+  opacity: 0;
+}
+
+/**
+ * Apply fade-in-scale animation to an element.
+ * @param {number} $delay - Animation delay in seconds
+ * @param {number} $duration - Animation duration in seconds
+ */
+@mixin animate-fade-in-scale($delay: 0s, $duration: 0.5s) {
+  animation: fadeInScale $duration cubic-bezier(0.16, 1, 0.3, 1) $delay forwards;
+  opacity: 0;
+}
+
+/**
+ * Apply floating animation to an element.
+ * @param {number} $duration - Animation duration in seconds
+ */
+@mixin animate-float($duration: 3s) {
+  animation: float $duration ease-in-out infinite;
+}
+
+/**
+ * Smooth transition for hover effects.
+ * @param {string} $properties - CSS properties to animate
+ */
+@mixin hover-transition($properties...) {
+  transition-property: $properties;
+  transition-duration: var(--duration-normal);
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/**
+ * Fast transition for interactive elements.
+ * @param {string} $properties - CSS properties to animate
+ */
+@mixin fast-transition($properties...) {
+  transition-property: $properties;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/**
+ * Staggered animation delay calculator.
+ * @param {number} $index - Element index in sequence
+ * @param {number} $base-delay - Base delay in seconds
+ * @param {number} $increment - Delay increment per element
+ */
+@mixin stagger-delay($index, $base-delay: 0s, $increment: 0.1s) {
+  animation-delay: calc(#{$base-delay} + #{$index} * #{$increment});
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hover-lift {
+  @include hover-transition(transform, box-shadow);
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+}
+
+.hover-glow {
+  @include hover-transition(box-shadow);
+
+  &:hover {
+    box-shadow:
+      0 0 20px rgba(66, 133, 244, 0.4),
+      0 0 40px rgba(66, 133, 244, 0.2);
+  }
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #ffffff 0%, #4285f4 50%, #ffffff 100%);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientFlow 8s ease infinite;
+}
