@@ -1,0 +1,13 @@
+/* TEAM */
+Developer: Leon Xia
+Site: https://vellum.dogitect.io
+Location: Earth
+
+/* SITE */
+Last update: 2026/03/28
+Standards: HTML5, CSS3, ES2022+
+Software: Angular, TypeScript, SCSS
+
+/* THANKS */
+Angular Team - https://angular.dev
+Open Source Community
