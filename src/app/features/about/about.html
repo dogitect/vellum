@@ -1,0 +1,50 @@
+<section class="about" aria-label="About Sections">
+  <h1 class="visually-hidden">About Vellum by Dogitect</h1>
+  <div class="about__container">
+    <aside class="about__left" [style.width]="leftPanelWidth()">
+      <nav class="about__nav" aria-label="Section navigation">
+        <ol class="about__index-list">
+          @for (section of sections(); track trackBySection($index, section)) {
+            <li class="about__index-item">
+              <button
+                type="button"
+                class="about__index-button"
+                [class.about__index-button--active]="$index === activeIndex()"
+                (click)="onIndexClick($index)"
+                [attr.aria-current]="$index === activeIndex() ? 'true' : null"
+                [attr.aria-label]="'View ' + section.title + ' section'"
+              >
+                <span class="about__index-number">{{
+                  ($index + 1).toString().padStart(2, '0')
+                }}</span>
+                <span class="about__index-name">{{ section.title }}</span>
+              </button>
+            </li>
+          }
+        </ol>
+      </nav>
+    </aside>
+
+    <div class="about__right" [style.width]="rightPanelWidth()">
+      <div class="about__gallery" #gallery>
+        @for (section of sections(); track trackBySection($index, section)) {
+          <article
+            class="about__slide"
+            [class.about__slide--active]="$index === activeIndex()"
+            [style.background-image]="
+              'url(' + getBackgroundUrl(section.imagePath) + ')'
+            "
+            [attr.aria-hidden]="$index !== activeIndex()"
+          >
+            <div class="about__slide-overlay"></div>
+            <div class="about__slide-content">
+              <p class="about__slide-statement">
+                {{ section.statement }}
+              </p>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+  </div>
+</section>

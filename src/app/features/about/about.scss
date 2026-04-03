@@ -1,0 +1,320 @@
+// Copyright 2025 Leon Xia. MIT License.
+
+.about {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.about__container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.about__left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-3xl) var(--space-2xl);
+  background-color: #000000;
+  position: relative;
+  overflow: hidden;
+
+  @media (max-width: 1024px) {
+    padding: var(--space-2xl) var(--space-lg);
+  }
+
+  @media (max-width: 768px) {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100% !important;
+    height: auto;
+    padding: var(--space-lg);
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+}
+
+.about__nav {
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.about__index-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.about__index-item {
+  margin: 0;
+}
+
+.about__index-button {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-xs) 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity var(--duration-normal) ease;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-on-background);
+    outline-offset: 4px;
+  }
+}
+
+.about__index-number {
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  color: var(--color-on-surface-variant);
+  min-width: 24px;
+  transition: color var(--duration-normal) ease;
+
+  .about__index-button--active & {
+    color: var(--color-on-background);
+    font-weight: 600;
+  }
+}
+
+.about__index-name {
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  color: var(--color-on-surface-variant);
+  transition:
+    color var(--duration-normal) ease,
+    font-weight var(--duration-normal) ease;
+
+  .about__index-button--active & {
+    color: var(--color-on-background);
+    font-weight: 600;
+  }
+}
+
+.about__right {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  background-color: #000000;
+
+  @media (max-width: 768px) {
+    width: 100% !important;
+    height: 100%;
+  }
+}
+
+.about__gallery {
+  display: flex;
+  height: 100%;
+  overflow-x: hidden;
+  scroll-behavior: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.about__slide {
+  flex: 0 0 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.4;
+  transition: opacity var(--duration-slow) ease;
+  will-change: opacity;
+
+  &--active {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    padding-bottom: 120px;
+  }
+}
+
+.about__slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.6) 50%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
+  pointer-events: none;
+}
+
+.about__slide-content {
+  position: relative;
+  z-index: 1;
+  width: calc(100% / 1.618);
+  max-width: none;
+  padding: var(--space-3xl);
+  text-align: center;
+  box-sizing: border-box;
+
+  @media (max-width: 1024px) {
+    width: calc(100% / 1.4);
+    padding: var(--space-2xl);
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: var(--space-lg);
+  }
+}
+
+.about__slide-number {
+  display: none;
+}
+
+.about__slide-statement {
+  font-size: clamp(var(--font-size-lg), 2.5vw, var(--font-size-2xl));
+  font-weight: 400;
+  color: var(--color-on-background);
+  margin: 0;
+  letter-spacing: 0;
+  line-height: 1.8;
+  white-space: pre-line;
+
+  @media (max-width: 768px) {
+    font-size: var(--font-size-base);
+  }
+}
+
+.about__contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+  max-width: 500px;
+}
+
+.about__contact-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.about__contact-input,
+.about__contact-textarea {
+  padding: var(--space-md) 0;
+  font-size: var(--font-size-base);
+  font-family: inherit;
+  color: var(--color-on-background);
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-divider);
+  border-radius: 0;
+  transition: all var(--duration-fast) ease;
+
+  &::placeholder {
+    color: var(--color-on-surface-variant);
+    opacity: 0.6;
+  }
+
+  &:focus {
+    outline: none;
+    border-bottom-color: var(--color-accent);
+  }
+
+  &--error {
+    border-bottom-color: var(--color-error);
+
+    &:focus {
+      border-bottom-color: var(--color-error);
+    }
+  }
+}
+
+.about__contact-textarea {
+  resize: none;
+  min-height: 80px;
+}
+
+.about__contact-actions {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: var(--space-md);
+}
+
+.about__contact-submit {
+  min-width: 180px;
+  padding: var(--space-md) var(--space-xl);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--color-background);
+  background-color: var(--color-on-background);
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: all var(--duration-normal) ease;
+  text-align: center;
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-primary-variant);
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+.about__contact-success {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.about__contact-success-icon {
+  width: var(--icon-xl);
+  height: var(--icon-xl);
+  color: var(--color-accent);
+  margin-bottom: var(--space-lg);
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.about__contact-success-title {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-on-background);
+  margin: 0;
+}
