@@ -1,0 +1,10 @@
+# Security Policy
+# https://securitytxt.org/
+
+Contact: mailto:leonxia@dogitect.io
+Expires: 2027-01-15T00:00:00.000Z
+Preferred-Languages: en, zh
+Canonical: https://vellum.dogitect.io/.well-known/security.txt
+
+# If you discover a security vulnerability, please report it via the contact above.
+# We appreciate responsible disclosure and will acknowledge your contribution.
