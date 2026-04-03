@@ -1,0 +1,24 @@
+# Build outputs
+dist/
+coverage/
+.angular/
+
+# Dependencies
+node_modules/
+
+# IDE
+.idea/
+.vscode/
+
+# Misc
+*.min.js
+*.min.css
+package-lock.json
+bun.lock
+bun.lockb
+
+# Cloudflare
+.wrangler/
+
+# Public assets
+public/images/
