@@ -176,8 +176,8 @@ Toggle `useCloudflareImages` to switch between local and CDN image delivery.
 
 Worker config lives in `wrangler.toml`, worker source in `worker/index.ts`.
 
-- **Production**: `bun run deploy` builds Angular and runs `wrangler deploy` to the `project-vellum` worker.
-- **Staging**: `bun run deploy:staging` deploys to `project-vellum-staging`.
+- **Production**: `bun run deploy` builds Angular and runs `wrangler deploy` to the `vellum` worker.
+- **Staging**: `bun run deploy:staging` deploys to `vellum-staging`.
 - **Preview**: `bun run preview` builds and runs `wrangler dev` locally.
 - **CI/CD**: `.github/workflows/r2-upload.yml` — auto-uploads images to Cloudflare R2 on pushes to `main` that touch `public/images/**`.
 

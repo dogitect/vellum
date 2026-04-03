@@ -5,7 +5,7 @@
 # handling security headers, redirects, and caching.
 
 # ── Worker entry ─────────────────────────────────────────────
-name = "project-vellum"
+name = "vellum"
 main = "worker/index.ts"
 compatibility_date = "2026-01-01"
 compatibility_flags = ["nodejs_compat"]
@@ -14,7 +14,7 @@ compatibility_flags = ["nodejs_compat"]
 # Requests go through the user worker, which calls
 # env.ASSETS.fetch() to serve files from the Angular build.
 [assets]
-directory = "dist/project-vellum/browser"
+directory = "dist/vellum/browser"
 binding = "ASSETS"
 html_handling = "drop-trailing-slash"
 not_found_handling = "single-page-application"
@@ -40,4 +40,4 @@ persist = true
 # ── Environment: Staging ─────────────────────────────────────
 # No custom domain; deployed to *.workers.dev by default.
 [env.staging]
-name = "project-vellum-staging"
+name = "vellum-staging"

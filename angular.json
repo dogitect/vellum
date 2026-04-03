@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "project-vellum": {
+    "vellum": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -73,10 +73,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "project-vellum:build:production"
+              "buildTarget": "vellum:build:production"
             },
             "development": {
-              "buildTarget": "project-vellum:build:development"
+              "buildTarget": "vellum:build:development"
             }
           },
           "defaultConfiguration": "development"
