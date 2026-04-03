@@ -1,0 +1,47 @@
+@use "../../../styles/animations" as animations;
+@use "../../../styles/responsive" as responsive;
+
+// Copyright 2025 Leon Xia. MIT License.
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  padding: var(--space-lg) var(--space-xl);
+  pointer-events: none;
+
+  @include responsive.tablet-only {
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  @include responsive.phone-only {
+    padding: var(--space-md);
+  }
+
+  &__container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+
+  &__copyright {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    padding: var(--space-sm) var(--space-xs);
+    background: transparent;
+    opacity: 0.18;
+    font-size: var(--font-size-xs);
+    color: var(--color-on-surface-variant);
+    letter-spacing: 0.05em;
+    line-height: 1;
+
+    @include responsive.phone-only {
+      font-size: 11px;
+    }
+  }
+}
