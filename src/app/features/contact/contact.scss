@@ -1,0 +1,191 @@
+// Copyright 2025 Leon Xia. MIT License.
+
+.contact {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3xl) var(--space-xl);
+  background-color: var(--color-background);
+
+  @media (max-width: 1024px) {
+    padding: var(--space-2xl) var(--space-lg);
+  }
+
+  @media (max-width: 768px) {
+    padding: var(--space-xl) var(--space-md);
+  }
+}
+
+.contact__container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 960px;
+  width: 100%;
+}
+
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  width: 100%;
+  background-color: transparent;
+  backdrop-filter: none;
+  border-radius: 0;
+  padding: var(--space-2xl) var(--space-3xl);
+  border: none;
+  box-shadow: none;
+
+  @media (max-width: 640px) {
+    padding: var(--space-xl);
+  }
+}
+
+.contact__heading {
+  font-size: var(--font-size-4xl);
+  font-weight: 600;
+  color: var(--color-on-background);
+  margin: 0 0 var(--space-xl);
+  text-align: left;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+
+  @media (max-width: 640px) {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-lg);
+  }
+}
+
+.contact__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.contact__input,
+.contact__textarea {
+  padding: var(--space-md) 0;
+  font-size: var(--font-size-base);
+  font-family: inherit;
+  color: var(--color-on-background);
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-divider);
+  border-radius: 0;
+  transition: all var(--duration-fast) ease;
+
+  &::placeholder {
+    color: var(--color-on-surface-variant);
+    opacity: 0.6;
+  }
+
+  &:focus {
+    outline: none;
+    border-bottom-color: var(--color-accent);
+  }
+
+  &--error {
+    border-bottom-color: var(--color-error);
+
+    &:focus {
+      border-bottom-color: var(--color-error);
+    }
+  }
+}
+
+.contact__textarea {
+  resize: none;
+  min-height: 120px;
+  border: none;
+  border-bottom: 1px solid var(--color-divider);
+  border-radius: 0;
+  padding: var(--space-md) 0;
+  background-color: transparent;
+
+  &:focus {
+    outline: none;
+    border-bottom-color: var(--color-accent);
+  }
+
+  &--error {
+    border-bottom-color: var(--color-error);
+
+    &:focus {
+      border-bottom-color: var(--color-error);
+    }
+  }
+}
+
+.contact__actions {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: var(--space-md);
+}
+
+.contact__submit {
+  min-width: 200px;
+  padding: var(--space-md) var(--space-2xl);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--color-background);
+  background-color: var(--color-on-background);
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: all var(--duration-normal) ease;
+  text-align: center;
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-primary-variant);
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+.contact__submit-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.contact__success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-2xl) var(--space-xl);
+  min-height: 400px;
+}
+
+.contact__success-icon {
+  width: var(--icon-2xl);
+  height: var(--icon-2xl);
+  color: var(--color-accent);
+  margin-bottom: var(--space-lg);
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.contact__success-title {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--color-on-background);
+  margin: 0;
+}

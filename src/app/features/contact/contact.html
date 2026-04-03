@@ -1,0 +1,99 @@
+<div class="contact">
+  <div class="contact__container">
+    @if (isSubmitted()) {
+      <div class="contact__success" role="alert">
+        <div class="contact__success-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+            <polyline points="22 4 12 14.01 9 11.01" />
+          </svg>
+        </div>
+        <h2 class="contact__success-title">Message Sent</h2>
+      </div>
+    } @else {
+      <form
+        class="contact__form"
+        [formGroup]="contactForm"
+        (ngSubmit)="onSubmit()"
+      >
+        <h1 class="contact__heading">Let's Talk</h1>
+
+        <div class="contact__field">
+          <label for="fullName" class="visually-hidden">Your full name</label>
+          <input
+            type="text"
+            id="fullName"
+            formControlName="fullName"
+            class="contact__input"
+            [class.contact__input--error]="
+              hasValidationError() && contactForm.get('fullName')?.invalid
+            "
+            [attr.aria-invalid]="
+              hasValidationError() && contactForm.get('fullName')?.invalid
+            "
+            placeholder="Your full name"
+            (input)="onInputChange()"
+          />
+        </div>
+
+        <div class="contact__field">
+          <label for="email" class="visually-hidden">Email address</label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            class="contact__input"
+            [class.contact__input--error]="
+              hasValidationError() && contactForm.get('email')?.invalid
+            "
+            [attr.aria-invalid]="
+              hasValidationError() && contactForm.get('email')?.invalid
+            "
+            placeholder="Email address"
+            (input)="onInputChange()"
+          />
+        </div>
+
+        <div class="contact__field">
+          <label for="projectInfo" class="visually-hidden"
+            >Tell me about your upcoming presentation</label
+          >
+          <textarea
+            id="projectInfo"
+            formControlName="projectInfo"
+            class="contact__textarea"
+            [class.contact__textarea--error]="
+              hasValidationError() && contactForm.get('projectInfo')?.invalid
+            "
+            [attr.aria-invalid]="
+              hasValidationError() && contactForm.get('projectInfo')?.invalid
+            "
+            rows="4"
+            placeholder="Tell me about your upcoming presentation"
+            (input)="onInputChange()"
+          ></textarea>
+        </div>
+
+        <div class="contact__actions">
+          <button
+            type="submit"
+            class="contact__submit"
+            [disabled]="isSubmitting()"
+          >
+            @if (isSubmitting()) {
+              <span class="contact__submit-loading">Sending...</span>
+            } @else {
+              Send a message
+            }
+          </button>
+        </div>
+      </form>
+    }
+  </div>
+</div>
